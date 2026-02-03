@@ -2,6 +2,7 @@ package iceShop.backend.domain;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import iceShop.backend.Enum.UserStatusEnum;
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -38,4 +40,7 @@ public class Employee extends User {
   @OneToOne
   @JoinColumn(name="account_id")
   private Account account;
+
+  @OneToMany(mappedBy = "employee")
+  private List<LeaveRequest> leaveRequests;
 }

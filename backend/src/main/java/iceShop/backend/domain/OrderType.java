@@ -1,0 +1,17 @@
+package iceShop.backend.domain;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name="order_types")
+@Getter
+@Setter
+public class OrderType extends BaseEntity{
+  @Id
+  private String id;
+  private String orderType;
+}

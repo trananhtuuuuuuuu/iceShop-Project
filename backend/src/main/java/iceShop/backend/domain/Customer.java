@@ -29,7 +29,7 @@ public class Customer extends User{
   private UserStatusEnum  status;
 
   @OneToOne
-  @JoinColumn(name="account_id")
+  @JoinColumn(name="account_id", nullable = true)
   private Account account;
 
 }

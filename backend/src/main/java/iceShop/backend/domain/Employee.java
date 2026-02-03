@@ -38,7 +38,7 @@ public class Employee extends User {
 
 
   @OneToOne
-  @JoinColumn(name="account_id")
+  @JoinColumn(name="account_id", nullable = true)
   private Account account;
 
   @OneToMany(mappedBy = "employee")

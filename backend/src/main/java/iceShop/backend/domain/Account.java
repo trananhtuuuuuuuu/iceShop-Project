@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import iceShop.backend.Enum.UserStatusEnum;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +26,8 @@ public class Account extends BaseEntity{
   private String password;
   private String accessToken;
   private String refreshToken;
+  
+  @Enumerated(EnumType.STRING)
   private UserStatusEnum status;
 
   @OneToOne(mappedBy = "account")

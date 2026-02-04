@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import iceShop.backend.Enum.UserStatusEnum;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +30,7 @@ public class Employee extends User {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
-
+  @Enumerated(EnumType.STRING)
   private UserStatusEnum status;
   private BigDecimal salary;
 

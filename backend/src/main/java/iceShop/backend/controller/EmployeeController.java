@@ -1,4 +1,4 @@
-package iceShop.backend.controller.employee;
+package iceShop.backend.controller;
 
 import java.util.ArrayList;
 import java.util.List;

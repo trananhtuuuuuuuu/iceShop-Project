@@ -2,6 +2,7 @@ package iceShop.backend.controller.employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,20 @@ import iceShop.backend.domain.Employee;
 import iceShop.backend.dto.employee.EmployeeDTO;
 import iceShop.backend.mapper.EmployeeMapper;
 import iceShop.backend.request.employee.CreateEmployeeRequest;
+import iceShop.backend.request.employee.ReplaceEmployeeRequest;
+import iceShop.backend.request.employee.UpdateEmployeeRequest;
 import iceShop.backend.response.ApiResponse;
 import iceShop.backend.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 
 
@@ -47,7 +55,7 @@ public class EmployeeController {
   }
 
   @GetMapping
-  public ResponseEntity<Object> getAllEmployees() {
+  public ResponseEntity<Object> GetAllEmployees() {
     
     List<EmployeeDTO> employeeDTOs = new ArrayList<>();
     List<Employee> employees = this.employeeService.GetAllEmployeesService();
@@ -69,8 +77,66 @@ public class EmployeeController {
   }
 
   @GetMapping("/id")
-  public String getEmployeeById(@RequestParam String param) {
-      return new String();
+  public ResponseEntity<Object> GetEmployeeById(@PathVariable UUID id) {
+    
+    Employee employee = this.employeeService.GetEmployeeByIdService(id);
+    EmployeeDTO employeeDTO = EmployeeMapper.toDTO(employee);
+    ApiResponse apiResponse = new ApiResponse();
+    apiResponse.setData(employeeDTO);
+    apiResponse.setError(null);
+    apiResponse.setMessage("Successfully");
+    apiResponse.setStatusCode(HttpStatus.OK.value());
+    apiResponse.setTotalObjects((long) 1);
+
+    return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Object> DeleteEmployeeById(@PathVariable UUID id) {
+    
+    this.employeeService.DeleteEmployeeByIdService(id);
+    ApiResponse apiResponse = new ApiResponse();
+    apiResponse.setData(null);
+    apiResponse.setError(null);
+    apiResponse.setMessage("Successfully");
+    apiResponse.setStatusCode(HttpStatus.NO_CONTENT.value());
+    apiResponse.setTotalObjects((long) 1);
+
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(apiResponse);
+  }
+
+  @PutMapping("{id}")
+  public ResponseEntity<Object> ReplaceEmployeeById(@PathVariable UUID id, 
+    @Valid @RequestBody ReplaceEmployeeRequest replaceEmployeeRequest) {
+      
+    Employee employee = this.employeeService.ReplaceEmployeeByIdService(id, replaceEmployeeRequest);
+    EmployeeDTO employeeDTO = EmployeeMapper.toDTO(employee);
+    ApiResponse apiResponse = new ApiResponse();
+
+    apiResponse.setData(employeeDTO);
+    apiResponse.setError(null);
+    apiResponse.setMessage("Successfully");
+    apiResponse.setStatusCode(HttpStatus.OK.value());
+    apiResponse.setTotalObjects((long) 1);
+
+    return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+  }
+
+  @PatchMapping("/{id}")
+  public ResponseEntity<Object> UpdateEmployeeById(@PathVariable UUID id, 
+    @Valid @RequestBody UpdateEmployeeRequest updateEmployeeRequest){
+
+    Employee employee = this.employeeService.UpdateEmployeeByIdService(id, updateEmployeeRequest);
+    EmployeeDTO employeeDTO = EmployeeMapper.toDTO(employee);
+    ApiResponse apiResponse = new ApiResponse();
+
+    apiResponse.setData(employeeDTO);
+    apiResponse.setError(null);
+    apiResponse.setMessage("Successfully");
+    apiResponse.setStatusCode(HttpStatus.OK.value());
+    apiResponse.setTotalObjects((long) 1);
+
+    return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
   }
   
   

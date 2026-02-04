@@ -11,12 +11,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name="order_details")
+@NoArgsConstructor
 public class OrderDetail extends BaseEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

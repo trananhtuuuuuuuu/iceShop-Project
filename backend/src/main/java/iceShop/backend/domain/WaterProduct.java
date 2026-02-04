@@ -10,12 +10,14 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="waters")
 @Getter
 @Setter
+@NoArgsConstructor
 public class WaterProduct{
   @Id
   private UUID id;

@@ -17,6 +17,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Table(name="employees")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Employee extends User {
 
   @Id
@@ -45,4 +47,15 @@ public class Employee extends User {
 
   @OneToMany(mappedBy = "employee")
   private List<LeaveRequest> leaveRequests;
+
+  public Employee(String fullName,
+    String phone,
+    String address,
+    String gender, 
+    UserStatusEnum status,
+    BigDecimal salary){
+      super(fullName, phone, address, gender);
+      this.status = status;
+      this.salary = salary;
+  }
 }

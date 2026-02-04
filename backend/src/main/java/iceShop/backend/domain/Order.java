@@ -14,12 +14,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="orders")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Order  extends BaseEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

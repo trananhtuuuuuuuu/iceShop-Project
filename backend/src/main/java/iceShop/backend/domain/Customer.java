@@ -36,4 +36,16 @@ public class Customer extends User{
   @JoinColumn(name="account_id", nullable = true)
   private Account account;
 
+  public Customer(String fullName,
+    String phone,
+    String address,
+    String gender,
+    BigDecimal numberOfOrder,
+    BigDecimal total,
+    UserStatusEnum status){
+      super(fullName, phone, address, gender);
+      this.numberOfOrder = numberOfOrder;
+      this.total = total;
+      this.status = status;
+  }
 }
